@@ -10,20 +10,22 @@
 </head>
     <body>
         <header>
-            <nav class="navbar navbar-light bg-light">
-                <h1>Пристанище гигачадов</h1>
-                <a class="navbar-brand" href="#">Giga one</a>
+            <nav class="navbar navbar-light bg-dark">
+                <div class="alert alert-light" role="alert">
+                Пристанище гигачадов
+                </div>
+                <a class="navbar-brand" href="#"></a>
                 {% if current_user.is_authenticate %}
                 <a class="navbar-brand" href="/logout">{{ current_user.name }} {{ current_user.surname }}</a>
                 {% else %}
                 <p>
-                <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
-                <a class="btn btn-success" href="/login">Войти</a>
+                <a class="btn btn-secondary " href="/register">Присоединиться</a>
+                <a class="btn btn-danger" href="/login">Я уже гигичад</a>
                 </p>
                 {% endif %}
             </nav>
                 <img src="static/giga_photo_base.jpg">
-                <h3>Приветствуем тебя, {{ username }}!</h3>
+                <h3>Приветствуем тебя, Реальный гигачад!</h3>
         </header>
         <!-- Begin page content -->
         <main role="main" class="container">

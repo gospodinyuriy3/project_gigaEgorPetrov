@@ -16,10 +16,10 @@
         </tr>
         <tr class="my_row">
             <td class="ordinary" bgcolor="#eeeeff">{{ training.training.capitalize() }}</td>
-            <td class="ordinary" bgcolor="#eeeeff">{{ ' '.join(names[job.trainer]) }}</td>
-            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ job.aboniment }} hours</td>
-            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ job.chads }}</td>
-            {% if job.is_finished %}
+            <td class="ordinary" bgcolor="#eeeeff">{{ ' '.join(names[training.trainer]) }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ training.aboniment }} hours</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ training.chads }}</td>
+            {% if training.is_finished %}
             <td class="ordinary" bgcolor="#eeffee" align="center">Finished</td>
             {% else %}
             <td class="ordinary" bgcolor="#ffeeff" align="center">Is not finished</td>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Adding a Training</h1>
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.train.label }}<br>
+    {{ form.train(class="form-control", type="text") }}<br>
+    {% for error in form.train.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+  </p>
+  <p>
+    {{ form.trainer.label }}<br>
+    {{ form.trainer(class="form-control", type="text") }}<br>
+    {% for error in form.trainer.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+  </p>
+  <p>
+    {{ form.aboniment.label }}<br>
+    {{ form.aboniment(class="form-control", type="text") }}<br>
+    {% for error in aboniment.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+  </p>
+  <p>
+    {{ form.chads.label }}<br>
+    {{ form.chads(class="form-control", type="text") }}<br>
+    {% for error in form.chads.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+  </p>
+  <p>{{ form.is_finished() }} {{ form.is_finished.label }}</p>
+  <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+
+{% endblock %}
