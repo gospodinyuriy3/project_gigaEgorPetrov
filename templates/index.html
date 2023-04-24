@@ -2,24 +2,25 @@
 
 {% block content %}
 <meta charset="UTF-8">
-<h2 align="center">Works log</h2>
-{% for training in trainings %}
-<h3>Action # {{ job.id }}</h3>
+<img src="static/giga_photo_base.jpg">
+<h3>Приветствуем тебя, Реальный гигачад!</h3>
+{% for _training in training %}
+<h3>Тренировка {{ _training.id }}</h3>
 <div class="table_container">
     <table class="my_table">
         <tr class="my_row">
-            <td class="title" width="400px" bgcolor="#dddddd">Title of activity</td>
-            <td class="title" width="150px" bgcolor="#dddddd">Trainer</td>
-            <td class="title" width="100px" bgcolor="#dddddd" align="center">Duration</td>
-            <td class="title" width="200px" bgcolor="#dddddd" align="center">List of chads</td>
-            <td class="title" width="100px" bgcolor="#dddddd" align="center">Is finished</td>
+            <td class="title" width="400px" bgcolor="#dddddd">Название Тренировки</td>
+            <td class="title" width="150px" bgcolor="#dddddd">ID Тренера</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Абонимент</td>
+            <td class="title" width="200px" bgcolor="#dddddd" align="center">Крутые</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Статус</td>
         </tr>
         <tr class="my_row">
-            <td class="ordinary" bgcolor="#eeeeff">{{ training.training.capitalize() }}</td>
-            <td class="ordinary" bgcolor="#eeeeff">{{ ' '.join(names[training.trainer]) }}</td>
-            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ training.aboniment }} hours</td>
-            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ training.chads }}</td>
-            {% if training.is_finished %}
+            <td class="ordinary" bgcolor="#eeeeff">{{ _training.train.capitalize() }}</td>
+            <td class="ordinary" bgcolor="#eeeeff">{{ names[_training.trainer] }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ _training.aboniment }} hours</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ _training.chads }}</td>
+            {% if _training.is_finished %}
             <td class="ordinary" bgcolor="#eeffee" align="center">Finished</td>
             {% else %}
             <td class="ordinary" bgcolor="#ffeeff" align="center">Is not finished</td>

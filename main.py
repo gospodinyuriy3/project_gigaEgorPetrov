@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect
 from data import db_session
-from data.trainings import Training
+from data.trainings import Trainings
 from data.users import User
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -9,6 +9,7 @@ from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -21,11 +22,11 @@ class LoginForm(FlaskForm):
 
 
 class TrainingsForm(FlaskForm):
-    train = StringField('Training Title')
-    trainer = StringField('Trainer ID')
-    aboniment = StringField('Aboniment')
-    chads = StringField('Chads')
-    is_finished = BooleanField('Is training finished')
+    train = StringField('Название Тренировки')
+    trainer = StringField('ID Тренера')
+    aboniment = StringField('Абонимент')
+    chads = StringField('Крутые')
+    is_finished = BooleanField('Статус')
     submit = SubmitField('Submit')
 
 
@@ -38,10 +39,10 @@ def load_user(user_id):
 @app.route('/')
 def index():
     session = db_session.create_session()
-    trainings = session.query(Training).all()
+    trainings = session.query(Trainings).all()
     users = session.query(User).all()
     names = {name.id: name.nickname for name in users}
-    return render_template("index.html", trainings=trainings, names=names)
+    return render_template("index.html", training=trainings, names=names)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -71,13 +72,13 @@ def addtrain():
     form = TrainingsForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        trains = Training()
+        trains = Trainings()
         trains.train = form.train.data
         trains.aboniment = form.aboniment.data
-        trains.collaborators = form.chads.data
+        trains.chads = form.chads.data
         trains.is_finished = form.is_finished.data
         trains.trainer = form.trainer.data
-        current_user.terains.append(trains)
+        current_user.trainings.append(trains)
         db_sess.merge(current_user)
         db_sess.commit()
         return redirect('/')

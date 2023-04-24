@@ -67,7 +67,7 @@ def main():
     session.add(user5)
 
     user6 = User()
-    user6.nickname = "Гордон"
+    user6.nickname = "Гордей"
     user6.age = 16
     user6.weight = 65
     user6.height = 170

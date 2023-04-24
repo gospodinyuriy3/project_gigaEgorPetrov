@@ -15,8 +15,8 @@
                 Пристанище гигачадов
                 </div>
                 <a class="navbar-brand" href="#"></a>
-                {% if current_user.is_authenticate %}
-                <a class="navbar-brand" href="/logout">{{ current_user.name }} {{ current_user.surname }}</a>
+                {% if current_user.is_authenticated %}
+                <a class="navbar-brand" href="/logout">{{ current_user.nickname }}</a>
                 {% else %}
                 <p>
                 <a class="btn btn-secondary " href="/register">Присоединиться</a>
@@ -24,8 +24,6 @@
                 </p>
                 {% endif %}
             </nav>
-                <img src="static/giga_photo_base.jpg">
-                <h3>Приветствуем тебя, Реальный гигачад!</h3>
         </header>
         <!-- Begin page content -->
         <main role="main" class="container">
