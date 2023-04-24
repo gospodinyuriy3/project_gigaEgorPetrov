@@ -85,6 +85,18 @@ def addtrain():
     return render_template('training.html', title='Adding a Training', form=form)
 
 
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
+
+@app.route('/quotes')
+def quotes():
+    return render_template('quotes.html')
+
+
+
+
 def main():
     db_session.global_init("db/gigachads.db")
     app.run(host='127.0.0.1', port=8080)
