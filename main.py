@@ -11,7 +11,6 @@ from wtforms import PasswordField, StringField, TextAreaField, SubmitField, Emai
 from wtforms.validators import DataRequired
 
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -29,7 +28,11 @@ class RegisterForm(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
-    name = StringField('Имя пользователя', validators=[DataRequired()])
+    nickname = StringField('Имя пользователя', validators=[DataRequired()])
+    age = StringField('Возраст', validators=[DataRequired()])
+    weight = StringField('Вес', validators=[DataRequired()])
+    height = StringField('Рост', validators=[DataRequired()])
+    speciality = StringField('Специальность', validators=[DataRequired()])
     about = TextAreaField("Немного о себе")
     submit = SubmitField('Войти')
 
@@ -79,7 +82,6 @@ def logout():
     return redirect('/')
 
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -106,6 +108,7 @@ def reqister():
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
+
 
 @app.route('/addtrain', methods=['GET', 'POST'])
 @login_required
@@ -136,10 +139,9 @@ def quotes():
     return render_template('quotes.html')
 
 
-
-
 def main():
     db_session.global_init("db/gigachads.db")
     app.run(host='127.0.0.1', port=8080)
+
 
 main()
