@@ -6,6 +6,9 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, SubmitField, StringField, BooleanField
 from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
+from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField
+from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
@@ -18,6 +21,15 @@ login_manager.init_app(app)
 class LoginForm(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
+    submit = SubmitField('Войти')
+
+
+class RegisterForm(FlaskForm):
+    email = EmailField('Почта', validators=[DataRequired()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
+    password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
+    name = StringField('Имя пользователя', validators=[DataRequired()])
+    about = TextAreaField("Немного о себе")
     submit = SubmitField('Войти')
 
 
@@ -65,6 +77,34 @@ def logout():
     logout_user()
     return redirect('/')
 
+
+
+app.route('/register', methods=['GET', 'POST'])
+def reqister():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if form.password.data != form.password_again.data:
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Пароли не совпадают")
+        db_sess = db_session.create_session()
+        if db_sess.query(User).filter(User.email == form.email.data).first():
+            return render_template('register.html', title='Регистрация',
+                                   form=form,
+                                   message="Такой пользователь уже есть")
+        user = User(
+            name=form.nickname.data,
+            age=form.age.data,
+            height=form.height.data,
+            weight=form.weight.data,
+            speciality=form.speciality.data,
+            email=form.email.data,
+        )
+        user.set_password(form.password.data)
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect('/login')
+    return render_template('register.html', title='Регистрация', form=form)
 
 @app.route('/addtrain', methods=['GET', 'POST'])
 @login_required
