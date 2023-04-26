@@ -11,6 +11,7 @@ from wtforms import PasswordField, StringField, TextAreaField, SubmitField, Emai
 from wtforms.validators import DataRequired
 
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
@@ -79,7 +80,7 @@ def logout():
 
 
 
-app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
