@@ -28,13 +28,13 @@ def main():
     user2.weight = 80
     user2.height = 190
     user2.speciality = 'driver'
-    user2.email = "ne_umer@_v_konce.su"
+    user2.email = "neumer@vkonce.su"
     user2.hashed_password = "scorpion"
     user2.set_password(user2.hashed_password)
     session.add(user2)
 
     user3 = User()
-    user3.nickname = "Patrick Pateman"
+    user3.nickname = "Patrick Bateman"
     user3.age = 30
     user3.weight = 80
     user3.height = 190
@@ -61,7 +61,7 @@ def main():
     user5.weight = 80
     user5.height = 190
     user5.speciality = 'твоя работа это не ты сам'
-    user5.email = "shiza@_u_menya_concretno"
+    user5.email = "shiz@umenyaconcretno"
     user5.hashed_password = "fight_club"
     user5.set_password(user5.hashed_password)
     session.add(user5)

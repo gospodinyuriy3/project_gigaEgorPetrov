@@ -4,10 +4,7 @@ from data.trainings import Trainings
 from data.users import User
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
-from wtforms import EmailField, PasswordField, SubmitField, StringField, BooleanField
-from wtforms.validators import DataRequired
-from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField
+from wtforms import PasswordField, StringField, TextAreaField, SubmitField, EmailField, BooleanField, IntegerField
 from wtforms.validators import DataRequired
 
 
@@ -29,9 +26,9 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
     nickname = StringField('Имя пользователя', validators=[DataRequired()])
-    age = StringField('Возраст', validators=[DataRequired()])
-    weight = StringField('Вес', validators=[DataRequired()])
-    height = StringField('Рост', validators=[DataRequired()])
+    age = IntegerField('Возраст', validators=[DataRequired()])
+    weight = IntegerField('Вес', validators=[DataRequired()])
+    height = IntegerField('Рост', validators=[DataRequired()])
     speciality = StringField('Специальность', validators=[DataRequired()])
     about = TextAreaField("Немного о себе")
     submit = SubmitField('Войти')
@@ -40,10 +37,10 @@ class RegisterForm(FlaskForm):
 class TrainingsForm(FlaskForm):
     train = StringField('Название Тренировки')
     trainer = StringField('ID Тренера')
-    aboniment = StringField('Абонимент')
+    aboniment = StringField('Абонемент')
     chads = StringField('Крутые')
-    is_finished = BooleanField('Статус')
-    submit = SubmitField('Submit')
+    is_finished = BooleanField('Завершена')
+    submit = SubmitField('Добавить')
 
 
 @login_manager.user_loader
@@ -95,14 +92,13 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = User(
-            name=form.nickname.data,
-            age=form.age.data,
-            height=form.height.data,
-            weight=form.weight.data,
-            speciality=form.speciality.data,
-            email=form.email.data,
-        )
+        user = User()
+        user.email = form.email.data
+        user.nickname = form.nickname.data
+        user.age = form.age.data
+        user.weight = form.weight.data
+        user.height = form.height.data
+        user.speciality = form.speciality.data
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
@@ -137,6 +133,11 @@ def gallery():
 @app.route('/quotes')
 def quotes():
     return render_template('quotes.html')
+
+
+@app.route('/top')
+def top():
+    return render_template('top.html')
 
 
 def main():

@@ -11,19 +11,19 @@
         <tr class="my_row">
             <td class="title" width="400px" bgcolor="#dddddd">Название Тренировки</td>
             <td class="title" width="150px" bgcolor="#dddddd">ID Тренера</td>
-            <td class="title" width="100px" bgcolor="#dddddd" align="center">Абонимент</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Абонемент</td>
             <td class="title" width="200px" bgcolor="#dddddd" align="center">Крутые</td>
             <td class="title" width="100px" bgcolor="#dddddd" align="center">Статус</td>
         </tr>
         <tr class="my_row">
             <td class="ordinary" bgcolor="#eeeeff">{{ _training.train.capitalize() }}</td>
             <td class="ordinary" bgcolor="#eeeeff">{{ names[_training.trainer] }}</td>
-            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ _training.aboniment }} hours</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ _training.aboniment }} часов</td>
             <td class="ordinary" bgcolor="#eeeeff" align="center">{{ _training.chads }}</td>
             {% if _training.is_finished %}
-            <td class="ordinary" bgcolor="#eeffee" align="center">Finished</td>
+            <td class="ordinary" bgcolor="#eeffee" align="center">Завершена</td>
             {% else %}
-            <td class="ordinary" bgcolor="#ffeeff" align="center">Is not finished</td>
+            <td class="ordinary" bgcolor="#ffeeff" align="center">В процессе</td>
             {% endif %}
         </tr>
 
